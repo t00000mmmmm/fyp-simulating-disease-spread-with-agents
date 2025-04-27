@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using TreeEditor;
 using UnityEngine.PlayerLoop;
 using UnityEditor.UIElements;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace UnityStandardAssets.Characters.FirstPerson
@@ -32,7 +34,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 originalPos;
         private bool reset;
         public float currentTime;
-        private bool timer;
         public int population;
         public int maxHouseholdSize;
         public float timeCycle;
@@ -41,7 +42,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public int infected;
         public int recovered;
         public float recoveryTime;
-        
+        private List<float> dailyInfected = new List<float>();
+        [SerializeField] private Text time;
+        [SerializeField] private Text days;
+        [SerializeField] private Text numberInfected;
+        [SerializeField] private Text recoveredText;
+        [SerializeField] private Text reproductionNumber;
 
         // Use this for initialization
         private void Start()
@@ -51,13 +57,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
             m_FovKick.Setup(m_Camera);
-            m_MouseLook.Init(transform, m_Camera.transform);
-            timer = true;
+            m_MouseLook.Init(transform, m_Camera.transform);    
             float spawnXOffset = spawnArea.transform.localScale.x*10/2;
             float spawnXIncrement = spawnArea.transform.localScale.x*10/(population);
             infected = InitialInfected;
             for (int x=0; x<population; x++){
-                Person a = Instantiate(indiviual, new Vector3(-spawnXOffset+spawnXIncrement*x+1, 1, 0), Quaternion.identity);
+                Person a = Instantiate(indiviual, new Vector3(-spawnXOffset+spawnXIncrement*x+1, 1, UnityEngine.Random.Range(-spawnArea.transform.lossyScale.z*5,spawnArea.transform.lossyScale.z*5)), Quaternion.identity);
                 a.controller = this;
                 a.timeToRecover = recoveryTime;
                 if (UnityEngine.Random.Range(x*infected, infected*population)>=population){
@@ -66,6 +71,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
             }
             infected = InitialInfected;
+            dailyInfected.Add(infected);
         }
 
 
@@ -74,6 +80,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             RotateView();
+            time.text = "Time: "+ currentTime;
+            days.text = "day cycles: "+ currentTime/timeCycle;
+            numberInfected.text = "infected count: "+ (infected-recovered);
+            recoveredText.text = "recovered: "+recovered;
         }
         
 
@@ -94,8 +104,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             float speed;
             currentTime += (float)0.1;
+            if ((int)(currentTime%timeCycle) == 0&(int)(currentTime/timeCycle)>0){
+                dailyInfected.Add(infected-recovered);
+                Debug.Log(dailyInfected[(int)(currentTime/timeCycle)]);
+                reproductionNumber.text = "R number: "+ dailyInfected[(int)(currentTime/timeCycle)]/dailyInfected[(int)(currentTime/timeCycle)-1];
+            }
             GetInput(out speed);
-            Debug.Log(timeCycle+" "+currentTime+" "+recoveryTime);
             // always move along the camera forward as it is the direction that it being aimed at
             Vector3 desiredMove =transform.forward * m_Input.x + transform.up * m_Input.y + transform.right * m_Input.z;
 

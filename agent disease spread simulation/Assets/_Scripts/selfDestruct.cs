@@ -15,7 +15,7 @@ public class selfDestruct : MonoBehaviour
     void Update()
     {
         counter+= (float)0.1;
-        if (counter > 10){
+        if (counter > 5){
          Destroy(gameObject);
         }
     }

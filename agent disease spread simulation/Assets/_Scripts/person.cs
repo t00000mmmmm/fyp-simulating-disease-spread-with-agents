@@ -26,6 +26,7 @@ public class Person : MonoBehaviour
             recovered = true;
             controller.recovered= controller.recovered+1;
             gameObject.name= "recovered individual";
+            gameObject.GetComponent<Renderer> ().material.color = Color.green;
         }
     }
     private void OnTriggerEnter (Collider other) {
@@ -35,6 +36,7 @@ public class Person : MonoBehaviour
                 infected = true;
                 controller.infected= controller.infected+1;
                 infectedTime = (int)controller.currentTime;
+                gameObject.GetComponent<Renderer> ().material.color = Color.red;
             }
             
             
