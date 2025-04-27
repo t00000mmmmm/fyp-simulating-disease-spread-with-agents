@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_OriginalCameraPosition;
         private Vector3 originalPos;
         private bool reset;
-        public double currentTime;
+        public float currentTime;
         private bool timer;
         public int population;
         public int maxHouseholdSize;
@@ -39,6 +39,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public GameObject spawnArea;
         public int InitialInfected;
         public int infected;
+        public int recovered;
+        public float recoveryTime;
+        
 
         // Use this for initialization
         private void Start()
@@ -56,13 +59,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             for (int x=0; x<population; x++){
                 Person a = Instantiate(indiviual, new Vector3(-spawnXOffset+spawnXIncrement*x+1, 1, 0), Quaternion.identity);
                 a.controller = this;
+                a.timeToRecover = recoveryTime;
                 if (UnityEngine.Random.Range(x*infected, infected*population)>=population){
                     a.infected=true;
                     infected--;
                 }
             }
             infected = InitialInfected;
-            StartCoroutine(WorldTime());
         }
 
 
@@ -90,7 +93,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void FixedUpdate()
         {
             float speed;
+            currentTime += (float)0.1;
             GetInput(out speed);
+            Debug.Log(timeCycle+" "+currentTime+" "+recoveryTime);
             // always move along the camera forward as it is the direction that it being aimed at
             Vector3 desiredMove =transform.forward * m_Input.x + transform.up * m_Input.y + transform.right * m_Input.z;
 
@@ -158,19 +163,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        IEnumerator WorldTime()
-        {
-            while (true)
-            {
-                currentTime += Time.deltaTime;
-                timeText.text = string.Format("Timer: " + (Math.Floor(currentTime * 100) / 100));
-                if (!timer)
-                {
-                    yield break;
-                }
-                yield return null;
-            }
-        }
+        
         
         
     }

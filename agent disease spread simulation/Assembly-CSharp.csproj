@@ -71,7 +71,7 @@
     <Compile Include="Assets\_Scripts\controller.cs" />
     <Compile Include="Assets\_Scripts\Wander.cs" />
     <Compile Include="Assets\_Scripts\Scripts\HeadBob.cs" />
-    <Compile Include="Assets\selfDestruct.cs" />
+    <Compile Include="Assets\_Scripts\selfDestruct.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

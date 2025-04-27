@@ -5,6 +5,9 @@ public class Person : MonoBehaviour
     public FirstPersonController controller;
     public bool infected;
     public GameObject sneezeCone;
+    private int infectedTime = 0;
+    public float timeToRecover;
+    private bool recovered;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,9 +16,16 @@ public class Person : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (infected)
+        if (infected&!recovered& (int)(controller.currentTime*4%controller.timeCycle) == 0)
         {
+
+            gameObject.name= "infected individual";
             Instantiate(sneezeCone,transform);
+        }
+        if (infected& !recovered & timeToRecover<(controller.currentTime-infectedTime)/controller.timeCycle){
+            recovered = true;
+            controller.recovered= controller.recovered+1;
+            gameObject.name= "recovered individual";
         }
     }
     private void OnTriggerEnter (Collider other) {
@@ -24,6 +34,7 @@ public class Person : MonoBehaviour
             {
                 infected = true;
                 controller.infected= controller.infected+1;
+                infectedTime = (int)controller.currentTime;
             }
             
             

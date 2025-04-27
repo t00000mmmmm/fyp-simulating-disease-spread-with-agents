@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   directionChangeInterval: 1
-  maxHeadingChange: 30
+  maxHeadingChange: 180
 --- !u!136 &6964582574569882157
 CapsuleCollider:
   m_ObjectHideFlags: 0

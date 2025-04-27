@@ -345,7 +345,6 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/selfDestruct.cs"
 "Assets/_Scripts/agentController.cs"
 "Assets/_Scripts/controller.cs"
 "Assets/_Scripts/monobehaviour.cs"
@@ -354,6 +353,7 @@
 "Assets/_Scripts/Scripts/HeadBob.cs"
 "Assets/_Scripts/Scripts/MouseLook.cs"
 "Assets/_Scripts/Scripts/RigidbodyFirstPersonController.cs"
+"Assets/_Scripts/selfDestruct.cs"
 "Assets/_Scripts/Wander.cs"
 -langversion:9.0
 /deterministic
