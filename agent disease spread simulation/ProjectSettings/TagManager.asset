@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - infection
+  - Individual
+  - wall
   layers:
   - Default
   - TransparentFX

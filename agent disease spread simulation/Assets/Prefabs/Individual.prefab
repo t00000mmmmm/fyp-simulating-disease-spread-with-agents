@@ -109,13 +109,13 @@ GameObject:
   - component: {fileID: 6964582574569882155}
   - component: {fileID: 6964582574569882156}
   - component: {fileID: 4086367764172203057}
+  - component: {fileID: 5703390555306165399}
   - component: {fileID: 6964582574569882157}
-  - component: {fileID: 6964582574569882158}
   - component: {fileID: 6964582574569882153}
   - component: {fileID: 5305454002421092413}
   m_Layer: 0
   m_Name: Individual
-  m_TagString: Untagged
+  m_TagString: Individual
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,21 +201,7 @@ MonoBehaviour:
   speed: 5
   directionChangeInterval: 1
   maxHeadingChange: 180
---- !u!136 &6964582574569882157
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6964582574569882159}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6964582574569882158
+--- !u!114 &5703390555306165399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,7 +215,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   infected: 0
-  sneezeCone: {fileID: 185073859117751853, guid: 9883d38287d0d2943a6e07372a57e80d, type: 3}
+  sneezeCone: {fileID: 8824563787596288458, guid: 9883d38287d0d2943a6e07372a57e80d, type: 3}
+  timeToRecover: 0
+  infections: 0
+--- !u!136 &6964582574569882157
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964582574569882159}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &6964582574569882153
 NavMeshAgent:
   m_ObjectHideFlags: 0

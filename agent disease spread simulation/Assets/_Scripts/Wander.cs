@@ -17,6 +17,7 @@ namespace Wander
 		CharacterController controller;
 		float heading;
 		Vector3 targetRotation;
+		
 
 		void Awake()
 		{
