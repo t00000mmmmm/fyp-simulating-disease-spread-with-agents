@@ -1,6 +1,4 @@
 using System;
-using System.Linq.Expressions;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 public class Person : MonoBehaviour
